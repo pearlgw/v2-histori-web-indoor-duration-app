@@ -1,14 +1,13 @@
 import React from 'react'
-import Link from 'next/link'
 import Image from 'next/image'
 
 const Logo = () => {
 
   return (
-    <div className='flex flex-row gap-1 w-[250px]'>
+    <div className='flex flex-row gap-1 w-auto'>
       {/* Image Logo */}
       <div className='flex items-center justify-center'>
-        <Image src='/logo/bengkod-logo.png' 
+        <Image src='/logo/bengkod-logo.png'
           alt=''
           width={45}
           height={45}

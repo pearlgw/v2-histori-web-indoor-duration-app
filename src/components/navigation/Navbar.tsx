@@ -2,20 +2,22 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { FiLogIn } from "react-icons/fi";
 
 const links = [
-  { name: "About", scrollLinkHref: "about", href: "/about" },
-  { name: "Home", scrollLinkHref: "home", href: "/" },
-  { name: "Contribute", scrollLinkHref: "contribute", href: "/contribute" },
+  { name: "About", href: "#about" },
+  { name: "Home", href: "/" },
+  { name: "Contribute", href: "#contribute" },
 ];
 
 interface NavProps {
   containerStyles?: string;
   listStyles?: string;
   linkStyles?: string;
+  mobile?: boolean;
 }
 
-const Navbar: React.FC<NavProps> = ({ containerStyles, listStyles, linkStyles }) => {
+const Navbar: React.FC<NavProps> = ({ containerStyles, listStyles, linkStyles, mobile }) => {
   const pathname = usePathname();
 
   return (
@@ -29,6 +31,14 @@ const Navbar: React.FC<NavProps> = ({ containerStyles, listStyles, linkStyles })
           </li>
         ))}
       </ul>
+
+      {/* Login on Mobile*/}
+      {mobile && (
+        <div className="flex flex-row items-center gap-2 pt-12">
+          <Link href="/login" className="text-primary text-xl font-bold">Login</Link>
+          <FiLogIn className="text-primary text-xl"/>
+        </div>
+      )}
     </nav>
   );
 };
