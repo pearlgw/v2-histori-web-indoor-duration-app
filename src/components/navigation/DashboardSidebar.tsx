@@ -50,7 +50,7 @@ export function DashboardSidebar() {
                     <SidebarMenuButton
                       asChild
                       className={`px-1 py-[18px] transition-all ${
-                        isActive ? "bg-primary text-white rounded-xl hover:bg-primary hover:text-white" : "hover:bg-accent hover:text-white hover:rounded-xl"
+                        isActive ? "bg-primary text-white rounded-xl hover:bg-primary hover:text-white" : "hover:bg-[#DBEAFE] hover:text-black hover:rounded-xl"
                       }`}
                     >
                       <a href={item.url}>

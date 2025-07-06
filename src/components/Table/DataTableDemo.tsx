@@ -21,12 +21,12 @@ interface DataTableDemoProps {
   title?: boolean;
   subtitle?: boolean;
   refreshSignal?: number;
+  isAdmin?: boolean;
 }
 
 
 
-const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshSignal = 0 }) => {
-  const [isAdmin, setIsAdmin] = React.useState(true);
+const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshSignal = 0, isAdmin }) => {
   const [filter, setFilter] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const rowsPerPage = 10;
@@ -118,7 +118,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
                     <TableCell className="text-center">{user.name}</TableCell>
                     <TableCell className="text-center">{user.total_duration}</TableCell>
                     <TableCell className="text-center">
-                      <span className={user.status === "Indoor" ? "text-green-600" : "text-red-600"}>
+                      <span className={user.status === "indoor" ? "text-green-600" : "text-red-600"}>
                         {user.status}
                       </span>
                     </TableCell>

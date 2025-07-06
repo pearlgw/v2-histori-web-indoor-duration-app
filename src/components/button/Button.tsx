@@ -7,7 +7,7 @@ import { IoChevronBackCircleOutline } from "react-icons/io5";
 interface ButtonProps {
   href?: string;
   onClick?: () => void;
-  variant?: "primary" | "whatsapp" | "addUser" | "back"; // Default variant is 'primary'
+  variant?: "primary" | "whatsapp" | "addUser" | "back" | "logout"; // Default variant is 'primary'
   size?: "sm" | "md" | "lg"; // Different button sizes
 }
 
@@ -21,6 +21,12 @@ const variantStyles = {
   },
   back: {
     bg: "bg-gray-200 hover:bg-gray-200",
+    icon: <IoChevronBackCircleOutline className="text-gray-800 w-4 h-4" />,
+    text: "Kembali",
+    buttonStyle: "text-gray-500 shadow-sm shadow-gray-200",
+  },
+  logout: {
+    bg: "bg-red-200 hover:bg-gray-200",
     icon: <IoChevronBackCircleOutline className="text-gray-800 w-4 h-4" />,
     text: "Kembali",
     buttonStyle: "text-gray-500 shadow-sm shadow-gray-200",

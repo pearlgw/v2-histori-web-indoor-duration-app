@@ -8,7 +8,15 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { Button } from '../ui/button'
 import { LoginSchema } from '@/schemas';
 
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/navigation"; // redirect setelah login
+
+
+
 const LoginForm = () => {
+  const router = useRouter();
+
+
   const form = useForm<z.infer<typeof LoginSchema>>({
     resolver: zodResolver(LoginSchema),
     defaultValues: {
@@ -18,8 +26,23 @@ const LoginForm = () => {
     },
   })
 
-  function onSubmit(values: z.infer<typeof LoginSchema>) {
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof LoginSchema>) {
+    const res = await signIn("credentials", {
+      email: values.email,
+      password: values.password,
+      verification_token: values.token, // sesuai dengan API
+      redirect: false,
+    });
+  
+    if (res?.ok) {
+      router.push("/dashboard");
+    } else {
+      console.error("Login gagal:", res?.error);
+      form.setError("email", {
+        type: "manual",
+        message: "Email/Password/Token salah",
+      });
+    }
   }
 
   return (
@@ -49,7 +72,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel className='font-bold'>Password</FormLabel>
               <FormControl>
-                <Input placeholder="******" {...field} />
+                <Input type="password" autoComplete="off" placeholder="******" {...field} />
               </FormControl>
               <FormMessage>{form.formState.errors.password?.message}</FormMessage>
             </FormItem>
@@ -64,7 +87,7 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel className='font-bold'>Token</FormLabel>
               <FormControl>
-                <Input placeholder="Masukkan token yang diberikan" {...field} />
+                <Input type="password" autoComplete="off" placeholder="Masukkan token yang diberikan" {...field} />
               </FormControl>
               <FormMessage>{form.formState.errors.token?.message}</FormMessage>
             </FormItem>

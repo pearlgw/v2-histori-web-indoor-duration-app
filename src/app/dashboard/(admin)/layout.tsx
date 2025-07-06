@@ -1,12 +1,13 @@
 "use client"
 import { DashboardSidebar } from "@/components/navigation/DashboardSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SessionProvider } from "next-auth/react";
 import React from "react";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode }){
   const [isAdmin,SetIsAdmin] = React.useState(true)
   return (
-    <>
+    <><SessionProvider>
       <SidebarProvider>
       <DashboardSidebar/>
 
@@ -16,6 +17,7 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
         {children}
 
       </SidebarProvider>
+    </SessionProvider>
     </>
   );
 }

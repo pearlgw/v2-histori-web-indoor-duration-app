@@ -4,7 +4,7 @@ export const LoginSchema = z.object({
   email: z.string().email("Invalid email address"),
 
   password: z.string().min(6, "Password must be at least 6 characters"),
-  token: z.string().min(6, "Token must be at least 6 characters"),
+  token: z.string().min(4, "Token must be at least 4 characters"),
 })
 
 export const RegisterSchema = z.object({
