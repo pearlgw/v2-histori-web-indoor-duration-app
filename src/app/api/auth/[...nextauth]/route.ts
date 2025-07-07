@@ -21,13 +21,27 @@ export const authOptions: NextAuthOptions = {
 
           const user = response.data.data;
 
-          if (user && user.access_token) {
+          // alif added decode token
+          const token = user.access_token;
+          const payload = JSON.parse(atob(token.split(".")[1]));
+          const role = payload.role;
+
+          // if (user && user.access_token) {
+          //   return {
+          //     id: user.uid,
+          //     name: user.fullname,
+          //     email: user.email,
+          //     role: user.role,
+          //     token: user.access_token,
+          //   };
+          // }
+          if (user && token) {
             return {
               id: user.uid,
               name: user.fullname,
               email: user.email,
-              role: user.role,
-              token: user.access_token,
+              role: role,
+              token: token,
             };
           }
 
@@ -52,6 +66,7 @@ export const authOptions: NextAuthOptions = {
         session.user.role = token.role;
       }
       session.accessToken = token.accessToken;
+
       return session;
     },
   },
