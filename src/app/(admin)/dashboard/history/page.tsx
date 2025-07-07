@@ -17,7 +17,6 @@ const HistoryPage = () => {
         if (!session?.accessToken) return;
 
         const res = await getLogHistory(session.accessToken);
-        console.log(res.data)
         setLogs(res.data);
       } catch (error) {
         toast.error("Gagal mengambil riwayat log");

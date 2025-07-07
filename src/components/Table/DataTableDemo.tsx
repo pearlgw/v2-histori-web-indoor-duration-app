@@ -21,7 +21,7 @@ interface DataTableDemoProps {
   title?: boolean;
   subtitle?: boolean;
   refreshSignal?: number;
-  isAdmin?: boolean;
+  isAdmin?: string;
 }
 
 
@@ -105,7 +105,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
                 <TableHead className="text-center text-white">Total Durasi</TableHead>
                 <TableHead className="text-center text-white">Status</TableHead>
                 <TableHead className="text-center text-white">Tanggal</TableHead>
-                {isAdmin && (
+                {isAdmin === "admin" && (
                   <TableHead className="text-center text-white">Aksi</TableHead>
                 )}
               </TableRow>
@@ -123,7 +123,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
                       </span>
                     </TableCell>
                     <TableCell className="text-center">{dayjs(user.created_at).format('YYYY-MM-DD')}</TableCell>
-                    {isAdmin && (
+                    {isAdmin === "admin" && (
                       <TableCell className="text-center">
                         <Link href={`/dashboard/${user.uid}`} className="text-blue-500 hover:underline">
                           View Details

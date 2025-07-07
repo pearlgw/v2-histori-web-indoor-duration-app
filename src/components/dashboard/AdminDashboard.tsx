@@ -34,11 +34,14 @@ const AdminDashboard = () => {
         ) : (
           <>
             <div className='flex flex-row gap-8 mx-4 xl:mx-14'>
-              <Button variant='addUser' size='sm' onClick={() => setShowForm(true)}/>
+              {userRole === "admin" && showForm ? (
+                <Button variant='addUser' size='sm' onClick={() => setShowForm(true)}/>
+              ) : (
               <CircleButton type="refresh" onClick={() => setRefreshSignal(prev => prev + 1)} />
+              )}
             </div>
             <div className='mx-4 xl:mx-14'>
-              <DataTableDemo refreshSignal={refreshSignal} isAdmin={userRole === "admin"}/>
+              <DataTableDemo refreshSignal={refreshSignal} isAdmin={userRole}/>
             </div>
           </>
         )}

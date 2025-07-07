@@ -23,10 +23,10 @@ export const authOptions: NextAuthOptions = {
 
           if (user && user.access_token) {
             return {
-              id: user.email,
+              id: user.uid,
               name: user.fullname,
               email: user.email,
-              role: "admin", // Ubah jika bisa ambil dari API
+              role: user.role,
               token: user.access_token,
             };
           }

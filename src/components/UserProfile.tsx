@@ -35,7 +35,7 @@ const UserProfile = () => {
           <Image src='/landing/card.png' alt='' fill objectFit='cover'/>
         </div>
         <div className='flex flex-col'>
-          <p className='font-semibold text-gray-700'>Halo, Admin!</p>
+          <p className='font-semibold text-gray-700'>Halo, {session?.user.name}!</p>
           <p className='text-[12px] text-gray-400'>{getDate()}</p>
         </div>
       </div>

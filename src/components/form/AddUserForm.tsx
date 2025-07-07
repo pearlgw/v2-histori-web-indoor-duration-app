@@ -43,7 +43,6 @@ const AddUserForm = () => {
       }
 
       const response = await createAssistant(values, session.accessToken)
-      console.log(response)
 
       if (response?.meta?.status_code === 201) {
         toast.success(`Asisten '${response.data.fullname}' berhasil ditambahkan`);

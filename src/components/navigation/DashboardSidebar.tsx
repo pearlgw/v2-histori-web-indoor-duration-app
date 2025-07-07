@@ -14,28 +14,36 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import Logo from "../Logo";
-
-// Menu items.
-const items = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: Home,
-  },
-  {
-    title: "Users",
-    url: "/dashboard/users",
-    icon: UsersRound,
-  },
-  {
-    title: "History",
-    url: "/dashboard/history",
-    icon: Inbox,
-  },
-];
+import { useSession } from "next-auth/react";
 
 export function DashboardSidebar() {
-  const pathname = usePathname(); // Get the current route
+  const pathname = usePathname();
+  const { data: session, status } = useSession();
+
+  const userRole = session?.user?.role; // pastikan ini sesuai nama field di sessionmu
+  // Menu items.
+  const items = [
+    {
+      title: "Dashboard",
+      url: "/dashboard",
+      icon: Home,
+    },
+    // hanya admin yang melihat Users dan History
+    ...(userRole === "admin"
+      ? [
+          {
+            title: "Users",
+            url: "/dashboard/users",
+            icon: UsersRound,
+          },
+          {
+            title: "History",
+            url: "/dashboard/history",
+            icon: Inbox,
+          },
+        ]
+      : []),
+  ];
 
   return (
     <Sidebar>

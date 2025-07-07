@@ -16,7 +16,6 @@ const page = () => {
         if (!session?.accessToken) return;
 
         const userList = await getAllUsers(session.accessToken);
-        console.log(userList)
         setUsers(userList);
       } catch (error: any) {
         toast.error("Gagal mengambil data user");
