@@ -1,7 +1,7 @@
 "use client"; // Ensure it's a Client Component
 
 import { usePathname } from "next/navigation";
-import { Calendar, Home, Inbox } from "lucide-react";
+import { UsersRound, Home, Inbox } from "lucide-react";
 
 import {
   Sidebar,
@@ -23,8 +23,13 @@ const items = [
     icon: Home,
   },
   {
+    title: "Users",
+    url: "/dashboard/users",
+    icon: UsersRound,
+  },
+  {
     title: "History",
-    url: "/history",
+    url: "/dashboard/history",
     icon: Inbox,
   },
 ];
@@ -43,7 +48,7 @@ export function DashboardSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item) => {
-                const isActive = pathname.startsWith(item.url); // Check if the menu is active
+                const isActive = pathname === item.url;
 
                 return (
                   <SidebarMenuItem key={item.title} className="rounded-lg w-auto py-1">

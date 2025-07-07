@@ -2,7 +2,8 @@
 import React from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { FiLogIn } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { useSession, signOut } from "next-auth/react";
 
 const links = [
   { name: "About", href: "#about" },
@@ -17,19 +18,35 @@ interface NavProps {
   mobile?: boolean;
 }
 
-const Navbar: React.FC<NavProps> = ({ containerStyles, listStyles, linkStyles, mobile }) => {
+const Navbar: React.FC<NavProps> = ({
+  containerStyles,
+  listStyles,
+  linkStyles,
+  mobile,
+}) => {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+  const isLoggedIn = status === "authenticated";
 
   return (
     <nav className={containerStyles}>
       <ul className={listStyles}>
-      {links.map((link, index) => (
+        {links.map((link, index) => (
           <li key={index}>
-            <Link href={link.href} className={linkStyles}>
+            <Link href={link.href.startsWith("#") ? `/${link.href}` : link.href} className={linkStyles}>
               {link.name}
             </Link>
           </li>
         ))}
+
+        {/* Show Dashboard link if logged in */}
+        {isLoggedIn && (
+          <li>
+            <Link href="/dashboard" className={linkStyles}>
+              Dashboard
+            </Link>
+          </li>
+        )}
       </ul>
 
       {/* Login on Mobile*/}

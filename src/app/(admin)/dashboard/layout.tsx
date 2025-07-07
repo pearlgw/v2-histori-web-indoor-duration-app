@@ -1,6 +1,7 @@
 "use client"
 import { DashboardSidebar } from "@/components/navigation/DashboardSidebar";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import UserProfile from "@/components/UserProfile";
 import { SessionProvider } from "next-auth/react";
 import React from "react";
 
