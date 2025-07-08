@@ -12,17 +12,17 @@ export default function Home() {
 
   return (
     <>
-    <SessionProvider>
-      <Header />
-      <Hero />
-      <Contact />
-      <Contribute />
-      <div className="mx-4 xl:mx-14">
-        <DataTableDemo title subtitle refreshSignal={0}/>
-      </div>
-      <About />
-      <Footer />
-    </SessionProvider>
+      <SessionProvider>
+        <Header />
+        <Hero />
+        <Contact />
+        <Contribute />
+        <div className="mx-4 xl:mx-14">
+          <DataTableDemo title subtitle refreshSignal={0} />
+        </div>
+        <About />
+        <Footer />
+      </SessionProvider>
     </>
   );
 }

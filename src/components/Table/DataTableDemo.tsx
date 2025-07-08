@@ -86,7 +86,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({
   if (error) return <p className="text-red-500">Error: {error}</p>;
 
   return (
-    <div className="mx-auto w-full">
+    <div className="mx-auto w-full my-16">
       <div>
         {title && <h1 className="text-2xl font-semibold">Cek Asistenmu!</h1>}
         <div className="flex items-center justify-between py-4">
@@ -114,7 +114,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({
 
         {/* Table */}
         <div className="rounded-xl overflow-hidden">
-          <Table>
+          <Table className="mt-5">
             <TableHeader className="bg-primary">
               <TableRow>
                 <TableHead className="text-center text-white py-4">

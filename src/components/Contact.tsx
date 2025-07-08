@@ -12,7 +12,7 @@ const Contact = () => {
           <h1 className='font-semibold w-full text-4xl leading-[50px] text-[#484848]'>Siap Berkontribusi?</h1>
           <p className='text-gray-500'>Bantu kami untuk memperkaya model yang kami miliki dengan kontribusi data dari anda!</p>
           <div className='mt-10'>
-            <Button variant='whatsapp' href='https://wa.me/6285723783739' />
+            <Button variant='whatsapp' href='https://wa.me/6281247430546' />
           </div>
         </div>
 

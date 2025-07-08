@@ -33,7 +33,7 @@ const Footer = () => {
           </div>
           <div className='flex flex-col gap-3'>
             <p className='font-bold'>Hubungi:</p>
-            <p>+6285723783739</p>
+            <p>+6281247430546</p>
             <p>bengkodcourse@gmail.com</p>
           </div>
         </div>
