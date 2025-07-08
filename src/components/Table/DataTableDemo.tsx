@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Input } from "@/components/ui/input";
 import { HiMagnifyingGlass } from "react-icons/hi2";
-import dayjs from "dayjs"
+import dayjs from "dayjs";
 import {
   Table,
   TableBody,
@@ -12,7 +12,14 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationNext, PaginationLink } from "@/components/ui/pagination";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationNext,
+  PaginationLink,
+} from "@/components/ui/pagination";
 import Link from "next/link";
 import { getPersonDuration, PersonDuration } from "@/lib/personService";
 import Image from "next/image";
@@ -24,13 +31,15 @@ interface DataTableDemoProps {
   isAdmin?: string;
 }
 
-
-
-const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshSignal = 0, isAdmin }) => {
+const DataTableDemo: React.FC<DataTableDemoProps> = ({
+  title,
+  subtitle,
+  refreshSignal = 0,
+  isAdmin,
+}) => {
   const [filter, setFilter] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
   const rowsPerPage = 10;
-  
 
   const [data, setData] = React.useState<PersonDuration[]>([]);
   const [loading, setLoading] = React.useState(true);
@@ -42,7 +51,7 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
         const result = await getPersonDuration();
         setData(result);
       } catch (err: any) {
-        setError(err.message || 'Error fetching data');
+        setError(err.message || "Error fetching data");
       } finally {
         setLoading(false);
       }
@@ -51,18 +60,25 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
     fetchData();
   }, [refreshSignal]);
 
-  const filteredData = data.filter((user) =>
+  const sortedData = [...data].sort(
+    (a, b) =>
+      new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+  );
+  const filteredData = sortedData.filter((user) =>
     user.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   const totalPages = Math.ceil(filteredData.length / rowsPerPage);
   const startIndex = (currentPage - 1) * rowsPerPage;
-  const paginatedData = filteredData.slice(startIndex, startIndex + rowsPerPage);
+  const paginatedData = filteredData.slice(
+    startIndex,
+    startIndex + rowsPerPage
+  );
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-48">
-        <Image src={"loading.svg"} width={50} height={50} alt=""/>
+        <Image src={"loading.svg"} width={50} height={50} alt="" />
       </div>
     );
   }
@@ -72,12 +88,13 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
   return (
     <div className="mx-auto w-full">
       <div>
-        {title && (
-          <h1 className="text-2xl font-semibold">Cek Asistenmu!</h1>
-        )}
+        {title && <h1 className="text-2xl font-semibold">Cek Asistenmu!</h1>}
         <div className="flex items-center justify-between py-4">
           {subtitle && (
-            <p className="hidden xl:block">Kamu bisa mencari asistenmu apakah sudah berada di ruangan atau belum!</p>
+            <p className="hidden xl:block">
+              Kamu bisa mencari asistenmu apakah sudah berada di ruangan atau
+              belum!
+            </p>
           )}
 
           {/* Search */}
@@ -100,11 +117,17 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
           <Table>
             <TableHeader className="bg-primary">
               <TableRow>
-                <TableHead className="text-center text-white py-4">No</TableHead>
+                <TableHead className="text-center text-white py-4">
+                  No
+                </TableHead>
                 <TableHead className="text-center text-white">Nama</TableHead>
-                <TableHead className="text-center text-white">Total Durasi</TableHead>
+                <TableHead className="text-center text-white">
+                  Total Durasi
+                </TableHead>
                 <TableHead className="text-center text-white">Status</TableHead>
-                <TableHead className="text-center text-white">Tanggal</TableHead>
+                <TableHead className="text-center text-white">
+                  Tanggal
+                </TableHead>
                 {isAdmin === "admin" && (
                   <TableHead className="text-center text-white">Aksi</TableHead>
                 )}
@@ -114,18 +137,33 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
               {paginatedData.length > 0 ? (
                 paginatedData.map((user, index) => (
                   <TableRow key={user.uid}>
-                    <TableCell className="py-4 text-center">{startIndex + index + 1}</TableCell>
+                    <TableCell className="py-4 text-center">
+                      {startIndex + index + 1}
+                    </TableCell>
                     <TableCell className="text-center">{user.name}</TableCell>
-                    <TableCell className="text-center">{user.total_duration}</TableCell>
                     <TableCell className="text-center">
-                      <span className={user.status === "indoor" ? "text-green-600" : "text-red-600"}>
+                      {user.total_duration}
+                    </TableCell>
+                    <TableCell className="text-center">
+                      <span
+                        className={
+                          user.status === "indoor"
+                            ? "text-green-600"
+                            : "text-red-600"
+                        }
+                      >
                         {user.status}
                       </span>
                     </TableCell>
-                    <TableCell className="text-center">{dayjs(user.created_at).format('YYYY-MM-DD')}</TableCell>
+                    <TableCell className="text-center">
+                      {dayjs(user.created_at).format("YYYY-MM-DD")}
+                    </TableCell>
                     {isAdmin === "admin" && (
                       <TableCell className="text-center">
-                        <Link href={`/dashboard/${user.uid}`} className="text-blue-500 hover:underline">
+                        <Link
+                          href={`/dashboard/${user.uid}`}
+                          className="text-blue-500 hover:underline"
+                        >
                           View Details
                         </Link>
                       </TableCell>
@@ -147,7 +185,9 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
             <PaginationContent>
               <PaginationItem>
                 <PaginationPrevious
-                  onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.max(prev - 1, 1))
+                  }
                   aria-disabled={currentPage === 1}
                   className="cursor-pointer hover:bg-gray-200"
                 />
@@ -165,7 +205,9 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
               ))}
               <PaginationItem>
                 <PaginationNext
-                  onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                  onClick={() =>
+                    setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+                  }
                   aria-disabled={currentPage === totalPages}
                   className="cursor-pointer hover:bg-gray-200"
                 />
@@ -176,6 +218,6 @@ const DataTableDemo: React.FC<DataTableDemoProps> = ({ title, subtitle, refreshS
       </div>
     </div>
   );
-}
+};
 
 export default DataTableDemo;
