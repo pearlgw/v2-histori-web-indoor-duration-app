@@ -81,13 +81,13 @@ const Header = () => {
                     mobile
                   />
                   {/* Mobile login/logout */}
-                  <div className="pt-6">
+                  {/* <div className="pt-6">
                     {session ? (
                       <CircleButton type='logout' onClick={handleLogout} />
                     ) : (
                       <Button variant="primary" size="md" href="/login" />
                     )}
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>

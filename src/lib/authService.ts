@@ -3,7 +3,7 @@ import { signOut } from "next-auth/react";
 
 export type LoginResponse = {
   token: string;
-  role: 'admin' | 'user';
+  role: "admin" | "user";
   name: string;
 };
 

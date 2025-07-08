@@ -22,11 +22,15 @@ export const authOptions: NextAuthOptions = {
           const user = response.data.data;
 
           if (user && user.access_token) {
+            const token = user.access_token;
+            const payload = JSON.parse(atob(token.split(".")[1]));
+            const role = payload.role;
+
             return {
               id: user.uid,
               name: user.fullname,
               email: user.email,
-              role: user.role,
+              role: role,
               token: user.access_token,
             };
           }

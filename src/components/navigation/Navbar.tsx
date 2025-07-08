@@ -50,12 +50,20 @@ const Navbar: React.FC<NavProps> = ({
       </ul>
 
       {/* Login on Mobile*/}
-      {mobile && (
-        <div className="flex flex-row items-center gap-2 pt-12">
-          <Link href="/login" className="text-primary text-xl font-bold">Login</Link>
-          <FiLogIn className="text-primary text-xl"/>
+      {isLoggedIn && mobile ? (
+        <div className="flex flex-row items-center gap-2 pt-12 cursor-pointer" onClick={() => signOut({ callbackUrl: "/" })}>
+          <span className="text-red-500 text-xl font-bold">Logout</span>
+          <FiLogOut className="text-red-500 text-xl" />
         </div>
+      ) : (
+        mobile && (
+          <div className="flex flex-row items-center gap-2 pt-12">
+            <Link href="/login" className="text-primary text-xl font-bold">Login</Link>
+            <FiLogIn className="text-primary text-xl"/>
+          </div>
+        )
       )}
+
     </nav>
   );
 };

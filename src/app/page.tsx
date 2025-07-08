@@ -14,7 +14,6 @@ export default function Home() {
     <>
     <SessionProvider>
       <Header />
-    </SessionProvider>
       <Hero />
       <Contact />
       <Contribute />
@@ -23,6 +22,7 @@ export default function Home() {
       </div>
       <About />
       <Footer />
+    </SessionProvider>
     </>
   );
 }

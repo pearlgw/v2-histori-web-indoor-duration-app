@@ -33,6 +33,8 @@ const LoginForm = () => {
       verification_token: values.token, // sesuai dengan API
       redirect: false,
     });
+
+    console.log(res)
   
     if (res?.ok) {
       router.push("/dashboard");
