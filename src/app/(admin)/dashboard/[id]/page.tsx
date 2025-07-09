@@ -33,15 +33,18 @@ export default async function Page({ params }: { params: { id: string } }) {
       <div className="mx-4 md:mx-14">
         <UserProfile />
         <div className="flex w-full h-[400px] justify-between">
-          <div className="flex justify-center items-center w-full h-full bg-white">
+        <div className="flex w-full h-[400px] justify-center items-center gap-x-8">
+          {/* Image */}
+          <div className="flex items-center justify-center h-full rounded overflow-hidden">
             <DecryptedImage
               filename={latest.labeled_image}
               token={session.accessToken}
               alt={latest.name}
             />
           </div>
-          <div className="flex items-center w-full h-full p-4">
-            <div>
+
+            {/* Info */}
+            <div className="flex flex-col items-start">
               <p className="font-bold text-xl mb-2">Person Detail</p>
               <p><span className="font-semibold">Name:</span> {latest.name}</p>
               <p><span className="font-semibold">NIM:</span> {latest.nim}</p>
