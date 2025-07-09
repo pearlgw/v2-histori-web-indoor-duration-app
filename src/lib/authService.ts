@@ -16,13 +16,16 @@ export const login = async (
 };
 
 export const logoutUser = async (token: string) => {
+  
+  const apiUrl = process.env.NEXT_PUBLIC_API_BASE_URL;
+  
   try {
     await api.post("api/3/auth/logout", null, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    await signOut({ callbackUrl: "/" });
+    await signOut({ callbackUrl: apiUrl });
   } catch (error) {
     console.error("Logout error:", error);
   }
